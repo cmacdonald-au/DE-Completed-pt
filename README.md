@@ -1,31 +1,54 @@
-# Deep End
+# NSW Government School Enrolments by Head Count 
 
 ## Overview
-This exercise is designed to examine your ability to;
 
-* Understand key requirements
-* Quickly adapt to an unfamiliar environment
-* Utilise third party libraries
-* Implement effective tests
-* Commit often
+This project is based on the Yii Framewrk and contains Models and Views to support the fetching of NSW Government School enrolment by head count data and displaying them.
 
-## Guidelines
-* Keep track of your time
-* Fork this repository
-* Create a PR back to the repository once complete
+## Code Sample
 
-## Tasks
-* Using [Yii2](https://github.com/yiisoft/yii2-app-basic)
-* Create a model and view that;
-   * Collects the [NSW government school enrolments by head count (2004-2016)](https://data.cese.nsw.gov.au/data/dataset/nsw-government-school-enrolments-by-head-count)
-   * Presents the above data in a useful way
-   * Refreshes the data if it is older than a defined period
-* Implement tests to validate key aspects of the above
-* Add a method that allows a logged in user to view information about the dataset, (when it was last downloaded, how many records, etc).
-* Provide (very) basic usage instructions
+Here is an example of how to implement this in a controller:
 
-## Notes
-Spend as much time as you like, but try to consider this as "a short excercise".
-You may retain, remove or customise as much of the "basic" app as you feel necessary.
-When submitting the PR, feel free to add commentary.
-You may create and use a database for this process if you feel it is necessary, but you must use the [Yii2 Migrations](http://www.yiiframework.com/doc-2.0/guide-db-migrations.html) for table creation.
+```
+...
+
+use app\models\Cache;
+use app\models\Import\Import;
+use app\models\Import\Adapter\RemoteFileAdapter;
+use app\models\School\SchoolParser;
+
+...
+
+    public function actionIndex()
+    {
+        $cache = new Cache('head-count', 60); // 60 seconds
+        $data = $cache->get();
+        if ($data === false) {
+            $url = 'https://data.cese.nsw.gov.au/data/dataset/1a8ee944-e56c-3480-aaf9-683047aa63a0/resource/64f0e82f-f678-4cec-9283-0b343aff1c61/download/headcount.json';
+
+            $adapter = new RemoteFileAdapter($url);
+            $importer = new Import($adapter);
+            $data = $importer->fetch();
+
+            $cache->set($data);
+        }
+
+        $schoolParser = new SchoolParser();
+        $schools = $schoolParser->parse($data);
+
+        return $this->render(
+            'index',
+            [
+                'schools' => $schools,
+                'session' => Yii::$app->session,
+            ]);
+    }
+```
+
+### To-Do List
+
+- [x] Create Model
+- [x] Create View
+- [x] Refresh Data
+- [x] Usage instructions
+- [ ] Write tests
+- [ ] Admin-stats view\
