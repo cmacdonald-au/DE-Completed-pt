@@ -16,8 +16,10 @@ $this->title = 'NSW government school enrolments by head count';
             'dataProvider' => $data,
             'columns' => [
                 'name' => [
-                    'attribute' => 'name',
-                    'label'     => 'School Name',
+                    'label' => 'School Name',
+                    'value' => function ($data) {
+                        return $data->getName();
+                    }
                 ],
                 'headcount' => [
                     'label' => 'Total Headcount',
