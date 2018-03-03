@@ -1,31 +1,16 @@
-# Deep End
+# NSW Government School Enrolments by Head Count 
 
 ## Overview
-This exercise is designed to examine your ability to;
 
-* Understand key requirements
-* Quickly adapt to an unfamiliar environment
-* Utilise third party libraries
-* Implement effective tests
-* Commit often
+This project is based on the Yii Framework and contains Models and Views to support the fetching of NSW Government School enrolment by head count data and displaying them.
 
-## Guidelines
-* Keep track of your time
-* Fork this repository
-* Create a PR back to the repository once complete
+### Installation Instructions
 
-## Tasks
-* Using [Yii2](https://github.com/yiisoft/yii2-app-basic)
-* Create a model and view that;
-   * Collects the [NSW government school enrolments by head count (2004-2016)](https://data.cese.nsw.gov.au/data/dataset/nsw-government-school-enrolments-by-head-count)
-   * Presents the above data in a useful way
-   * Refreshes the data if it is older than a defined period
-* Implement tests to validate key aspects of the above
-* Add a method that allows a logged in user to view information about the dataset, (when it was last downloaded, how many records, etc).
-* Provide (very) basic usage instructions
+1. Git clone this project
+2. Follow installation instructions on the [Yii 2 Basic Project](https://github.com/yiisoft/yii2-app-basic) to set up a local web server environment
+3. Access [http://yii2basic.test](http://yii2basic.test) in your web browser to view the head count enrolment results
+4. To view fetch statistics, login as a user on the top-right corner on the page with username/password **admin/admin**.
 
-## Notes
-Spend as much time as you like, but try to consider this as "a short excercise".
-You may retain, remove or customise as much of the "basic" app as you feel necessary.
-When submitting the PR, feel free to add commentary.
-You may create and use a database for this process if you feel it is necessary, but you must use the [Yii2 Migrations](http://www.yiiframework.com/doc-2.0/guide-db-migrations.html) for table creation.
+### Testing Instructions
+
+Run `./vendor/bin/codecept run` in the command line.
