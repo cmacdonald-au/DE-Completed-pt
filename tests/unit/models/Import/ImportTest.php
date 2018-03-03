@@ -19,7 +19,7 @@ class ImportTest extends Unit
 
     public function testInvalidAdapterInterface()
     {
-        $this->setExpectedException(
+        $this->expectException(
             '\TypeError',
             'must implement interface app\models\Import\Adapter\AdapterInterface'
         );
