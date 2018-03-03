@@ -2,47 +2,18 @@
 
 ## Overview
 
-This project is based on the Yii Framewrk and contains Models and Views to support the fetching of NSW Government School enrolment by head count data and displaying them.
+This project is based on the Yii Framework and contains Models and Views to support the fetching of NSW Government School enrolment by head count data and displaying them.
 
-## Code Sample
+### Installation Instructions
 
-Here is an example of how to implement this in a controller:
+1. Git clone this project
+2. Follow installation instructions on the [Yii 2 Basic Project](https://github.com/yiisoft/yii2-app-basic) to set up a local web server environment
+3. Access [http://yii2basic.test](http://yii2basic.test) in your web browser to view the head count enrolment results
+4. To view fetch statistics, login as a user on the top-right corner on the page with username/password **admin/admin**.
 
-```
-...
+### Testing Instructions
 
-use app\models\Cache;
-use app\models\Import\Import;
-use app\models\Import\Adapter\RemoteFileAdapter;
-use app\models\School\SchoolParser;
-
-...
-
-    public function actionIndex()
-    {
-        $cache = new Cache('head-count', 60); // 60 seconds
-        $data = $cache->get();
-        if ($data === false) {
-            $url = 'https://data.cese.nsw.gov.au/data/dataset/1a8ee944-e56c-3480-aaf9-683047aa63a0/resource/64f0e82f-f678-4cec-9283-0b343aff1c61/download/headcount.json';
-
-            $adapter = new RemoteFileAdapter($url);
-            $importer = new Import($adapter);
-            $data = $importer->fetch();
-
-            $cache->set($data);
-        }
-
-        $schoolParser = new SchoolParser();
-        $schools = $schoolParser->parse($data);
-
-        return $this->render(
-            'index',
-            [
-                'schools' => $schools,
-                'session' => Yii::$app->session,
-            ]);
-    }
-```
+TBC...
 
 ### To-Do List
 
@@ -51,4 +22,4 @@ use app\models\School\SchoolParser;
 - [x] Refresh Data
 - [x] Usage instructions
 - [ ] Write tests
-- [ ] Admin-stats view\
+- [x] Admin-stats view

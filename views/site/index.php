@@ -2,16 +2,22 @@
 /* @var $this yii\web\View */
 
 use yii\grid\GridView;
+
+$formatter = \Yii::$app->formatter;
 $this->title = 'NSW government school enrolments by head count';
 ?>
 <div class="site-index">
     <h1>School Data</h1>
-    <?php if ($session->has('admin')) {
-        // todo: Do some admin-y things
-    }
-    ?>
-    <p class="lead">See below the available school's and a head count for each year.</p>
-    123
+
+    <?php if (!Yii::$app->user->isGuest) { ?>
+        <h2>Statistics</h2>
+        <ul>
+            <li><strong>Last Fetched At:</strong> <?php echo $formatter->asDateTime($lastFetchedAt, 'long') ?></li>
+            <li><strong>Total Records Synced:</strong> <?php echo count($schools->getAll()) ?></li>
+        </ul>
+    <?php } ?>
+
+    <p class="lead">See below the available school's and a total head count of enrolments recorded.</p>
     <?php
         echo GridView::widget([
             'dataProvider' => $data,
