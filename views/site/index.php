@@ -9,7 +9,7 @@ $this->title = 'NSW government school enrolments by head count';
         // todo: Do some admin-y things
     }
     ?>
-    <p class="lead">See below the available school's and a head count for each year.</p>
+    <p class="lead">See below the available school's and a total count of enrolments on record.</p>
     <table>
         <thead>
             <th>School Name</th>
