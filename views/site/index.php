@@ -1,6 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 
+use yii\grid\GridView;
 $this->title = 'NSW government school enrolments by head count';
 ?>
 <div class="site-index">
@@ -9,19 +10,25 @@ $this->title = 'NSW government school enrolments by head count';
         // todo: Do some admin-y things
     }
     ?>
-    <p class="lead">See below the available school's and a total count of enrolments on record.</p>
-    <table>
-        <thead>
-            <th>School Name</th>
-            <th>Head Count</th>
-        </thead>
-        <tbody>
-            <?php foreach ($schools->getAll() as $school) { ?>
-            <tr>
-                <td><?php echo $school->getName() ?></td>
-                <td><?php echo $school->getTotalHeadCount() ?></td>
-            </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+    <p class="lead">See below the available school's and a head count for each year.</p>
+    123
+    <?php
+        echo GridView::widget([
+            'dataProvider' => $data,
+            'columns' => [
+                'name' => [
+                    'label' => 'School Name',
+                    'value' => function ($data) {
+                        return $data->getName();
+                    }
+                ],
+                'headcount' => [
+                    'label' => 'Total Headcount',
+                    'value' => function ($data) {
+                        return $data->getTotalHeadCount();
+                    }
+                ],
+            ],
+        ]);
+    ?>
 </div>
