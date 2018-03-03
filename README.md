@@ -13,13 +13,4 @@ This project is based on the Yii Framework and contains Models and Views to supp
 
 ### Testing Instructions
 
-TBC...
-
-### To-Do List
-
-- [x] Create Model
-- [x] Create View
-- [x] Refresh Data
-- [x] Usage instructions
-- [ ] Write tests
-- [x] Admin-stats view
+Run `./vendor/bin/codecept run` in the command line.
